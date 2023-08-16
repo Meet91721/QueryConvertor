@@ -1,8 +1,8 @@
 from tkinter import *
-from matplotlib.pyplot import text
-from numpy import full
 import cx_Oracle
 
+
+# Defining main screen
 screen = Tk(screenName="Main Screen")
 screen.title("DBMS Innovative Assignment")
 p1 = PhotoImage(file='icon.png')
@@ -10,12 +10,16 @@ screen.iconphoto(False, p1)
 screen.geometry("1536x864")
 canvas = Canvas()
 
+
+# Designing with lines
 canvas.create_line(0, 180, 1536, 180)
 canvas.create_line(0, 182, 1536, 182)
 canvas.create_line(600, 0, 600, 800)
 canvas.create_line(602, 0, 602, 800)
 canvas.pack(expand=1, fill=BOTH)
 
+
+# About the developers
 sentence = Entry(screen, width=30, font=(
     "Times New Roman", 20), borderwidth=10, relief=FLAT)
 ddlQuery = Entry(screen, width=30, font=(
@@ -32,6 +36,7 @@ r4 = Label(text='Queries', font=("Times New Roman", 20))
 r4.place(x=200, y=220)
 
 
+# Defining buttons for Relational algebra
 def prj():
     strr = sentence.get()
     sentence.insert(len(strr), "π")
@@ -62,6 +67,7 @@ def intersectbut():
     sentence.insert(len(strr), "∩")
 
 
+# Function for execution of the sql commands
 def execute_SQL(sql_command):
     sql_command = sql_command[:-1]
     try:
@@ -95,6 +101,7 @@ def execute_SQL(sql_command):
             con.close()
 
 
+# Algorithm for the conversion of sql to relational algebra
 def sql_to_ra_func(str):
 
     def format(str):
@@ -222,6 +229,7 @@ def sql_to_ra_func(str):
     return stringify(solve(str))
 
 
+# Algorithm for the conversion of Relational algebra query to sql
 def ra_to_sql_func(str):
 
     def format(str):
@@ -414,6 +422,7 @@ def ra_to_sql_func(str):
     return stringify(solve(str)), sqlcmd
 
 
+# Positioning labels, buttons, and entry box
 global sql_label
 global ra_label
 sql_label = Label(font=("Times New Roman", 20))
@@ -614,5 +623,5 @@ ra_to_sql.place(x=1200, y=70)
 ddlQuery.place(x=60, y=270, height=40)
 ddlbtn.place(x=220, y=450)
 
-
+# Initializing the screen
 screen.mainloop()
